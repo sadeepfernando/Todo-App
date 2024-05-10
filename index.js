@@ -17,6 +17,27 @@ mongoose.connect(connectionUrl)
 //setup view engine
 app.set('view engine','ejs');
 
+//create get route for home page
+app.get('/',(req,res,next) =>{
+    try{
+        res.render('index')
+    }catch(error){
+        res.status(500)
+        .json({message:error.message})
+    }
+})
+
+//create a get route for add-todo page
+app.get('/add-todo',(req,res,next) =>{
+    try{
+        res.render('newTodo')
+
+    }catch(error){
+        res.status(500)
+        .json({message:error.message})
+    }
+})
+
 //listen the server
 app.listen(PORT,()=>{
     console.log(`you are listening to port ${PORT}`)
