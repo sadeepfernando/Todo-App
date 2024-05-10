@@ -1,6 +1,7 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const PORT = 8000;
 
 
@@ -16,6 +17,9 @@ mongoose.connect(connectionUrl)
 
 //setup view engine
 app.set('view engine','ejs');
+
+//load public assets
+app.use(express.static(path.join(__dirname,"public")))
 
 //create get route for home page
 app.get('/',(req,res,next) =>{
