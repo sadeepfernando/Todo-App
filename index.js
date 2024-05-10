@@ -38,6 +38,30 @@ app.get('/add-todo',(req,res,next) =>{
     }
 })
 
+//create route for update todo page
+app.get('/update-todo',(req,res,next) =>{
+    try{
+        res.render('updateTodo')
+
+    }catch(error){
+        res.status(500)
+        .json({message:error.message})
+    }
+})
+
+//cteate a rote for delete todo page
+app.get('/delete-todo',(req,res,next) =>{
+    try{
+        res.render('deleteTodo')
+
+    }catch(error){
+        res.status(500)
+        .json({message:error.message})
+    }
+})
+
+
+
 //listen the server
 app.listen(PORT,()=>{
     console.log(`you are listening to port ${PORT}`)
