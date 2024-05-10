@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const { title } = require('process');
 const PORT = 8000;
 
 
@@ -24,7 +25,7 @@ app.use(express.static(path.join(__dirname,"public")))
 //create get route for home page
 app.get('/',(req,res,next) =>{
     try{
-        res.render('index')
+        res.render('index',{title:"List Todo"})
     }catch(error){
         res.status(500)
         .json({message:error.message})
@@ -34,7 +35,7 @@ app.get('/',(req,res,next) =>{
 //create a get route for add-todo page
 app.get('/add-todo',(req,res,next) =>{
     try{
-        res.render('newTodo')
+        res.render('newTodo',{title:"New Todo"})
 
     }catch(error){
         res.status(500)
@@ -45,7 +46,7 @@ app.get('/add-todo',(req,res,next) =>{
 //create route for update todo page
 app.get('/update-todo',(req,res,next) =>{
     try{
-        res.render('updateTodo')
+        res.render('updateTodo', {title:"Update Todo"})
 
     }catch(error){
         res.status(500)
@@ -56,7 +57,7 @@ app.get('/update-todo',(req,res,next) =>{
 //cteate a rote for delete todo page
 app.get('/delete-todo',(req,res,next) =>{
     try{
-        res.render('deleteTodo')
+        res.render('deleteTodo',{title:"Delete Todo"})
 
     }catch(error){
         res.status(500)

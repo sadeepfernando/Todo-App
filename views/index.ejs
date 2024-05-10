@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Todo App</title>
-</head>
-<body>
-    
+<%- include("partials/_header") %>
     <div class="table-container">
         <h2 class="todo-title">Todo List</h2>
     </div>
 
     <div>
-        <a href="" class="btn">Add Todo</a>
+        <a href="/add-todo" class="btn">Add Todo</a>
     </div>
 
     <br/>
@@ -34,14 +25,12 @@
             <th>created time</th>
             <th>updated time</th>
             <th>
-                <a href="" class="btn">Edit</a>
-                <a href="" class="btn">Delete</a>
+                <a href="/update-todo" class="btn">Edit</a>
+                <a href="/delete-todo" class="btn">Delete</a>
             </th>
 
         </tr>
     </table>
+<%- include("partials/_footer") %>
 
 
-
-</body>
-</html>
