@@ -20,16 +20,18 @@
         </tr>
 
         <tr>
-            <th>todo title</th>
-            <th>todo description</th>
-            <th>created time</th>
-            <th>updated time</th>
+            <% for(let i = 0; i < todo.length; i++){ %>
+            <th><%= todo[i].title %></th>
+            <th><%= todo[i].desc %></th>
+            <th><%= todo[i].createdAt %></th>
+            <th><%= todo[i].updatedAt %></th>
             <th>
                 <a href="/update-todo" class="btn">Edit</a>
                 <a href="/delete-todo" class="btn">Delete</a>
             </th>
 
         </tr>
+        <% } %>
     </table>
 <%- include("partials/_footer") %>
 
