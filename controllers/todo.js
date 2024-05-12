@@ -1,10 +1,14 @@
 const Todo = require('../models/Todos');
+const moment = require('moment');
 
 
 const homeControllers = async (req,res,next) =>{
     try{
         //fetching todo to the main page
         const todo = await Todo.find()
+
+        //time format by moment
+       res.locals.moment =   moment ;
 
         res.render('index', {title:'List todo',todo})
     }catch(error){

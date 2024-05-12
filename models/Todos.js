@@ -1,4 +1,4 @@
-const { Timestamp } = require('mongodb');
+
 const mongoose = require('mongoose');
 
 
@@ -7,7 +7,7 @@ const todoSchema = mongoose.Schema(
         title :{type:String, required:true},
         desc :String
     },
-    {Timestamp: true}
+    {timestamps:true}
     );
     
     //creating the model
