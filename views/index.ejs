@@ -21,14 +21,14 @@
 
         <tr>
             <% for(let i = 0; i < todo.length; i++){ %>
-            <th><%= todo[i].title %></th>
-            <th><%= todo[i].desc %></th>
-            <th><%= moment(todo[i].createdAt).format("MMM DD, YYYY, HH:mm:ss") %></th>
-            <th><%= moment(todo[i].updatedAt).format("MMM DD, YYYY, HH:mm:ss") %></th>
-            <th>
-                <a href="/update-todo" class="btn">Edit</a>
-                <a href="/delete-todo" class="btn">Delete</a>
-            </th>
+            <td><%= todo[i].title %></td>
+            <td><%= todo[i].desc %></td>
+            <td><%= moment(todo[i].createdAt).format("MMM DD, YYYY, HH:mm:ss") %></td>
+            <td><%= moment(todo[i].updatedAt).format("MMM DD, YYYY, HH:mm:ss") %></td>
+            <td>
+                <a  class="btn" href="/update-todo?id=<%= todo[i]._id %>">Edit</a>
+                <a class="btn" href="/delete-todo?id=<%=todo[i]._id %>" >Delete</a>
+            </td>
 
         </tr>
         <% } %>

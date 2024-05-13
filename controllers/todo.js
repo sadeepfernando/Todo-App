@@ -2,6 +2,7 @@ const Todo = require('../models/Todos');
 const moment = require('moment');
 
 
+
 const homeControllers = async (req,res,next) =>{
     try{
         //fetching todo to the main page
@@ -10,7 +11,7 @@ const homeControllers = async (req,res,next) =>{
         //time format by moment
        res.locals.moment =   moment ;
 
-        res.render('index', {title:'List todo',todo})
+        res.render('index', {title:'List todo',todo});
     }catch(error){
         res.status(500)
         .json({message:error.message});
@@ -19,16 +20,20 @@ const homeControllers = async (req,res,next) =>{
 
 const addTodoControllers = (req,res,next) =>{
     try{
-        res.render('newTodo',{title :'Add todo'})
+        res.render('newTodo',{title :'Add todo'});
     }catch(error){
         res.status(500)
         .json({message:error.message});
     }
 }
 
-const updateTodoControllers = (req,res,next) =>{
+const updateTodoControllers = async (req,res,next) =>{
     try{
-        res.render('updateTodo',{title :'Update todo'})
+        //finding the user related to an id
+        const {id} = req.query;
+        const todo = await Todo.findById(id);
+
+        res.render('updateTodo',{title :'Update todo', todo});
     }catch(error){
         res.status(500)
         .json({message:error.message});
@@ -37,7 +42,7 @@ const updateTodoControllers = (req,res,next) =>{
 
 const deleteTodoControllers = (req,res,next) =>{
     try{
-        res.render('deleteTodo',{title :'Delete todo'})
+        res.render('deleteTodo',{title :'Delete todo'});
     }catch(error){
         res.status(500)
         .json({message:error.message});
@@ -47,7 +52,7 @@ const deleteTodoControllers = (req,res,next) =>{
 const addTodoPostControllers = async(req,res,next) =>{
     try{
         const {title, desc} = req.body;
-        const newTodo = new Todo({title,desc})
+        const newTodo = new Todo({title,desc});
         await newTodo.save();
 
         res.redirect('/');
@@ -58,11 +63,34 @@ const addTodoPostControllers = async(req,res,next) =>{
     }
 }
 
+const saveUpdateTodoControllers = async (req,res,next) =>{
+    try{
+        const {id} = req.params
+        const {title , desc} = req.body;
+        
+        const todo = await Todo.findById(id);
+        if(!todo){
+            return res.status(400).json({message: "Todo not found"});
+        }
+        todo.title = title
+        todo.desc = desc
+
+        await todo.save();
+        res.redirect('/');
+
+    }catch(error){
+        res.status(500)
+        .json({message:error.message})
+    }
+}
+
 module.exports =
 {
     homeControllers,
     addTodoControllers,
     updateTodoControllers,
     deleteTodoControllers,
-    addTodoPostControllers
+    addTodoPostControllers,
+    saveUpdateTodoControllers
+    
 }

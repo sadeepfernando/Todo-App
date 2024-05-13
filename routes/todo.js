@@ -18,6 +18,9 @@ router.get('/update-todo', todoControllers.updateTodoControllers );
 router.get('/delete-todo', todoControllers.deleteTodoControllers);
 
 //post mapping adding todos
-router.post('/add-todo', todoControllers.addTodoPostControllers)
+router.post('/add-todo', todoControllers.addTodoPostControllers);
+
+//To save updated data 
+router.post('/update-todo/:id',todoControllers.saveUpdateTodoControllers)
 
 module.exports = router;
