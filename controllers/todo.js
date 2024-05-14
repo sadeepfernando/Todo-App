@@ -42,7 +42,9 @@ const updateTodoControllers = async (req,res,next) =>{
 
 const deleteTodoControllers = (req,res,next) =>{
     try{
-        res.render('deleteTodo',{title :'Delete todo'});
+        const {id} = req.query;
+
+        res.render('deleteTodo',{title :'Delete todo', id});
     }catch(error){
         res.status(500)
         .json({message:error.message});
@@ -84,6 +86,21 @@ const saveUpdateTodoControllers = async (req,res,next) =>{
     }
 }
 
+const confirmDeleteTodoControllers = async(req,res,next) =>{
+    try{
+        const {id,confirm} = req.query;
+
+        if(confirm === "yes"){
+            await Todo.findByIdAndDelete(id);
+        }
+        res.redirect('/');
+
+    }catch(error){
+        res.status(500)
+        .json({message:error.message})
+    }
+}
+
 module.exports =
 {
     homeControllers,
@@ -91,6 +108,7 @@ module.exports =
     updateTodoControllers,
     deleteTodoControllers,
     addTodoPostControllers,
-    saveUpdateTodoControllers
-    
+    saveUpdateTodoControllers,
+    confirmDeleteTodoControllers
+
 }

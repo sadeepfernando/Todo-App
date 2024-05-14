@@ -21,6 +21,9 @@ router.get('/delete-todo', todoControllers.deleteTodoControllers);
 router.post('/add-todo', todoControllers.addTodoPostControllers);
 
 //To save updated data 
-router.post('/update-todo/:id',todoControllers.saveUpdateTodoControllers)
+router.post('/update-todo/:id',todoControllers.saveUpdateTodoControllers);
+
+//To delete todo data
+router.get('/confirm-delete',todoControllers.confirmDeleteTodoControllers);
 
 module.exports = router;
